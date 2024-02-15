@@ -1,0 +1,16 @@
+---
+- name: manipulate environmental variables
+  hosts: windows
+  connection: winrm
+  gather_facts: true
+  
+  tasks:
+  
+  - name: set environmental variables on a windows machine
+    ansible.windows.win_environment:
+      state: present                 # as opposed to "absent"
+      name: MCFLY                    # environmental variable (key)
+      value: wait a minute, Doc.     # mapped to the ev (value)
+      level: machine                 # environmental variable available to all users
+      
+

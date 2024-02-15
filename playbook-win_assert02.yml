@@ -1,0 +1,40 @@
+---
+- name: install or update notepad++
+  hosts: windows
+  gather_facts: true
+  connection: winrm
+
+  tasks:
+    - name: assert the processors
+      ansible.builtin.assert:
+        that: ansible_facts.processor_cores >= 1
+        fail_msg: "i don't have the power!"
+        success_msg: "ready to go"
+
+
+    - name: check the architecture
+      ansible.builtin.assert:
+        that: ansible_facts.architecture == "64-bit"
+        fail_msg: "my architecture is not 64 bit"
+        success_msg: "architecture is 64 bit"
+    
+    - name: check the distribution
+      ansible.builtin.assert:
+        that: ansible_facts.distribution == "Microsoft Windows Server 2022 Datacenter Evaluation"
+        fail_msg: "distribution is not Microsoft Windows Server 2022 Datacenter Evaluation"
+        success_msg: "distribution is Microsoft Windows Server 2022 Datacenter Evaluation"
+    
+    - name: assert the major version of windows
+      ansible.builtin.assert:
+        that: ansible_facts.distribution_major_version == "10"
+        
+    - name: check how much free ram
+      ansible.builtin.assert:
+        that: ansible_facts.memfree_mb > 500
+        
+
+    - name: check the ip addresses
+      ansible.builtin.assert:
+        #that: ansible_facts.interfaces[0].ipv4.address == "10.7.108.243"
+        #that: ansible_ip_addresses[1] == "10.7.108.243"
+        that: ansible_facts.ip_addresses[1] == "10.7.108.243"

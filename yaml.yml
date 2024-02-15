@@ -1,0 +1,13 @@
+studies:
+  monday: linux
+  tuesday: linux adv
+  wednesday: windows
+  thursday: windows adv
+  friday: cleanup
+
+fedex:
+  - '248 timber road'
+  - '451 west high street'
+  - '99 cola court'
+  - '88 jump street'
+

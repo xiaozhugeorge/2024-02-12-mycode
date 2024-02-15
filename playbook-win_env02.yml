@@ -1,0 +1,19 @@
+---
+- name: manipulate multiple environmental variables
+  hosts: windows
+  connection: winrm
+  gather_facts: true
+  
+  vars:
+    breakfast_drink: "coffee with milk"
+  
+  tasks:
+  
+  - name: set environmental variables on a windows machine
+    ansible.windows.win_environment:
+      level: machine                 # environmental variable available to all users
+      variables:                     # map multiple variables at once
+        MY_ENV_VAR: one
+        MY_APP_VAR: 'B2DE12FF'
+        MY_APP_VAR_TWO: '{{ breakfast_drink }}'   # we can assign a variable by a variable   
+

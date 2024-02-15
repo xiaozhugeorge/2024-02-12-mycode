@@ -1,0 +1,14 @@
+---
+- name: checkup on windows
+  hosts: windows
+  connection: winrm
+  gather_facts: true
+  
+  tasks:
+    - name: assert the domain
+      ansible.builtin.assert:
+        that: ansible_facts.windows_domain == "WORKGROUP"
+        fail_msg: "domain appears incorrect"
+        success_msg: "domain correct"
+
+

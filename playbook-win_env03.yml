@@ -1,0 +1,17 @@
+---
+- name: unset multiple environmental variables
+  hosts: windows
+  connection: winrm
+  gather_facts: true
+        
+  tasks:
+  
+  - name: unset environmental variables on a windows machine
+    ansible.windows.win_environment:
+      level: machine                 # environmental variable available to all users
+      variables:                     # variables without values will be "unset" per ansible-doc
+        MY_ENV_VAR: 
+        MY_APP_VAR: 
+        MY_APP_VAR_TWO:
+        MCFLY: 
+
