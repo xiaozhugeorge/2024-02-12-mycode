@@ -1,0 +1,13 @@
+---
+- name: create a new user with ansible
+  hosts: windows
+  connection: winrm
+  gather_facts: true
+  
+  tasks:
+    - name: Add User
+      ansible.windows.win_user:
+        name: ansible
+        password: "@ns1bl3"
+        state: present
+

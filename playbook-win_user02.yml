@@ -1,0 +1,17 @@
+---
+- name: create a new user with ansible
+  hosts: windows
+  connection: winrm
+  gather_facts: true
+  
+  vars_files:
+    - new_users.yaml
+  
+  tasks:
+    - name: Add User
+      ansible.windows.win_user:
+        name: "{{ item.name }}"
+        password: "{{ item.pass }}"
+        state: present
+      loop: "{{ new_users }}"
+
